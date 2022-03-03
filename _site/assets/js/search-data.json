@@ -1,0 +1,44 @@
+{"0": {
+    "doc": "API Design Guidelines",
+    "title": "API Design Guidelines",
+    "content": "To facilitate use as a quick reference, the details of many guidelines can be expanded individually. Details are never hidden when this page is printed. ",
+    "url": "http://localhost:4000/docs/apiDesiginGuidelines",
+    "relUrl": "/docs/apiDesiginGuidelines"
+  },"1": {
+    "doc": "Conventions",
+    "title": "Conventions",
+    "content": " ",
+    "url": "http://localhost:4000/docs/apiDesiginGuidelines/Conventions/",
+    "relUrl": "/docs/apiDesiginGuidelines/Conventions/"
+  },"2": {
+    "doc": "Fundamentals",
+    "title": "Fundamentals",
+    "content": " ",
+    "url": "http://localhost:4000/docs/apiDesiginGuidelines/Fundamentals/",
+    "relUrl": "/docs/apiDesiginGuidelines/Fundamentals/"
+  },"3": {
+    "doc": "Naming",
+    "title": "Naming",
+    "content": " ",
+    "url": "http://localhost:4000/docs/apiDesiginGuidelines/Naming/",
+    "relUrl": "/docs/apiDesiginGuidelines/Naming/"
+  },"4": {
+    "doc": "Revision History",
+    "title": "Revision History",
+    "content": " ",
+    "url": "http://localhost:4000/docs/apiDesiginGuidelines/Revision%20History/",
+    "relUrl": "/docs/apiDesiginGuidelines/Revision%20History/"
+  },"5": {
+    "doc": "Special Instructions",
+    "title": "Special Instructions",
+    "content": " ",
+    "url": "http://localhost:4000/docs/apiDesiginGuidelines/Special%20Instructions/",
+    "relUrl": "/docs/apiDesiginGuidelines/Special%20Instructions/"
+  },"6": {
+    "doc": "Home",
+    "title": "Home",
+    "content": " ",
+    "url": "http://localhost:4000/",
+    "relUrl": "/"
+  }
+}
