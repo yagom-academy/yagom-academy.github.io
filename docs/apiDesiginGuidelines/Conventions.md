@@ -5,9 +5,15 @@ parent: API Design Guidelines
 nav_order: 3
 ---
 
+
 # Conventions
 
 ## General Conventions
+
+<details>
+<summary>General Conventions 원문보기</summary>
+<div markdown="1">
+
 - **Document the complexity of any computed property that is not O(1).** People often assume that property access involves no significant computation, because they have stored properties as a mental model. Be sure to alert them when that assumption may be violated.
 
 - **Prefer methods and properties to free functions.** Free functions are used only in special cases:
@@ -119,9 +125,19 @@ nav_order: 3
     </div>
     </details>
 
+</div>
+</details>
+
+번역문
+
 .
 
 ## Parameters
+
+<details>
+<summary>Parameters 원문보기</summary>
+<div markdown="1">
+
 
 ```swift
 func move(from start: Point, to end: Point)
@@ -219,9 +235,19 @@ func move(from start: Point, to end: Point)
 
 - **Prefer to locate parameters with defaults toward the end** of the parameter list. Parameters without defaults are usually more essential to the semantics of a method, and provide a stable initial pattern of use where methods are invoked.
 
+</div>
+</details>
+
+번역문
+
 .
 
 ## Argument Labels
+
+<details>
+<summary>Argument Labels 원문보기</summary>
+<div markdown="1">
+
 
 ```swift
 func move(from start: Point, to end: Point)
@@ -323,3 +349,8 @@ x.move(from: x, to: y)
     </details>
 
 - **Label all other arguments.**
+
+</div>
+</details>
+
+번역문

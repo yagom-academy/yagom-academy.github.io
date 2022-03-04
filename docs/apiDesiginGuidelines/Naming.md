@@ -8,6 +8,11 @@ nav_order: 2
 # Naming
 
 ## Promote Clear Usage
+
+<details>
+<summary>Promote Clear Usage 원문보기</summary>
+<div markdown="1">
+
 - **Include all the words needed to avoid ambiguity** for a person reading code where the name is used.
     <details>
     <summary>DETAIL</summary>
@@ -127,9 +132,19 @@ nav_order: 2
     </div>
     </details>
 
+</div>
+</details>
+
+번역문
+
 .
 
 ## Strive for Fluent Usage
+
+<details>
+<summary>Strive for Fluent Usage 원문보기</summary>
+<div markdown="1">
+
 - **Prefer method and function names that make use sites form grammatical English phrases.**
     <details>
     <summary>DETAIL</summary>
@@ -209,6 +224,7 @@ nav_order: 2
             |---|---|
             |x.sort()|    z = x.sorted()|   
             |x.append(y)|    z = x.appending(y)|
+            
             <details>
             <summary>DETAIL</summary>
             <div markdown="1">
@@ -257,12 +273,21 @@ nav_order: 2
 
 - The names of other **types, properties, variables, and constants should read as nouns.**
 
+</div>
+</details>
+
+번역문
+
 .
 
 ## Use Terminology Well
 
-|**Term of Art**| noun - a word or phrase that has a precise, specialized meaning within a particular field or profession.|
-|---|---|
+<details>
+<summary>Use Terminology Well 원문보기</summary>
+<div markdown="1">
+
+**Term of Art**     
+noun - a word or phrase that has a precise, specialized meaning within a particular field or profession.
 
 - **Avoid obscure terms** if a more common word conveys meaning just as well. Don’t say “epidermis” if “skin” will serve your purpose. Terms of art are an essential communication tool, but should only be used to capture crucial meaning that would otherwise be lost.
 
@@ -296,4 +321,7 @@ nav_order: 2
     </div>
     </details>
 
+</div>
+</details>
 
+번역문

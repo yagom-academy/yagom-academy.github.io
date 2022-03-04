@@ -6,6 +6,11 @@ nav_order: 4
 ---
 
 # Special Instructions
+
+<details>
+<summary>Special Instructions 원문보기</summary>
+<div markdown="1">
+
 - **Label tuple members and name closure parameters** where they appear in your API.
     <details>
     <summary>DETAIL</summary>
@@ -85,3 +90,8 @@ nav_order: 4
 
     </div>
     </details>
+
+</div>
+</details>
+
+번역문
