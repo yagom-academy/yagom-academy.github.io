@@ -1,0 +1,367 @@
+I"�c<h1 id="naming">Naming</h1>
+
+<h2 id="promote-clear-usage">Promote Clear Usage</h2>
+
+<details>
+<summary>Promote Clear Usage 원문보기</summary>
+<div>
+
+    <ul>
+      <li><strong>Include all the words needed to avoid ambiguity</strong> for a person reading code where the name is used.
+        <details>
+  <summary>DETAIL</summary>
+  <div>
+
+            <p>For example, consider a method that removes the element at a given position within a collection.</p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">✅</span>
+  <span class="kd">extension</span> <span class="kt">List</span> <span class="p">{</span>
+  <span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">remove</span><span class="p">(</span><span class="n">at</span> <span class="nv">position</span><span class="p">:</span> <span class="kt">Index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Element</span>
+  <span class="p">}</span>
+  <span class="n">employees</span><span class="o">.</span><span class="nf">remove</span><span class="p">(</span><span class="nv">at</span><span class="p">:</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div>            </div>
+
+            <p>If we were to omit the word at from the method signature, it could imply to the reader that the method searches for and removes an element equal to x, rather than using x to indicate the position of the element to remove.</p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">❌</span>
+  <span class="n">employees</span><span class="o">.</span><span class="nf">remove</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1">// unclear: are we removing x?</span>
+</code></pre></div>            </div>
+          </div>
+  </details>
+      </li>
+      <li><strong>Omit needless words.</strong> Every word in a name should convey salient information at the use site.
+        <details>
+  <summary>DETAIL</summary>
+  <div>
+
+            <p>More words may be needed to clarify intent or disambiguate meaning, but those that are redundant with information the reader already possesses should be omitted. In particular, omit words that merely repeat type information.</p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">❌</span>
+  <span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">removeElement</span><span class="p">(</span><span class="n">_</span> <span class="nv">member</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Element</span><span class="p">?</span>
+
+  <span class="n">allViews</span><span class="o">.</span><span class="nf">removeElement</span><span class="p">(</span><span class="n">cancelButton</span><span class="p">)</span>
+</code></pre></div>            </div>
+
+            <p>In this case, the word Element adds nothing salient at the call site. This API would be better:</p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">✅</span>
+  <span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">remove</span><span class="p">(</span><span class="n">_</span> <span class="nv">member</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Element</span><span class="p">?</span>
+
+  <span class="n">allViews</span><span class="o">.</span><span class="nf">remove</span><span class="p">(</span><span class="n">cancelButton</span><span class="p">)</span> <span class="c1">// clearer</span>
+</code></pre></div>            </div>
+
+            <p>Occasionally, repeating type information is necessary to avoid ambiguity, but in general it is better to use a word that describes a parameter’s role rather than its type. See the next item for details.</p>
+
+          </div>
+  </details>
+      </li>
+      <li><strong>Name variables, parameters, and associated types according to their roles,</strong> rather than their type constraints.
+        <details>
+  <summary>DETAIL</summary>
+  <div>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">❌</span>
+  <span class="k">var</span> <span class="nv">string</span> <span class="o">=</span> <span class="s">"Hello"</span>
+  <span class="kd">protocol</span> <span class="kt">ViewController</span> <span class="p">{</span>
+      <span class="kd">associatedtype</span> <span class="kt">ViewType</span> <span class="p">:</span> <span class="kt">View</span>
+  <span class="p">}</span>
+  <span class="kd">class</span> <span class="kt">ProductionLine</span> <span class="p">{</span>
+      <span class="kd">func</span> <span class="nf">restock</span><span class="p">(</span><span class="n">from</span> <span class="nv">widgetFactory</span><span class="p">:</span> <span class="kt">WidgetFactory</span><span class="p">)</span>
+  <span class="p">}</span>
+</code></pre></div>            </div>
+
+            <p>Repurposing a type name in this way fails to optimize clarity and expressivity. Instead, strive to choose a name that expresses the entity’s role.</p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">✅</span>
+  <span class="k">var</span> <span class="nv">greeting</span> <span class="o">=</span> <span class="s">"Hello"</span>
+  <span class="kd">protocol</span> <span class="kt">ViewController</span> <span class="p">{</span>
+      <span class="kd">associatedtype</span> <span class="kt">ContentView</span> <span class="p">:</span> <span class="kt">View</span>
+  <span class="p">}</span>
+  <span class="kd">class</span> <span class="kt">ProductionLine</span> <span class="p">{</span>
+      <span class="kd">func</span> <span class="nf">restock</span><span class="p">(</span><span class="n">from</span> <span class="nv">supplier</span><span class="p">:</span> <span class="kt">WidgetFactory</span><span class="p">)</span>
+  <span class="p">}</span>
+</code></pre></div>            </div>
+
+            <p>If an associated type is so tightly bound to its protocol constraint that the protocol name is the role, avoid collision by appending Protocol to the protocol name:</p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">protocol</span> <span class="kt">Sequence</span> <span class="p">{</span>
+      <span class="kd">associatedtype</span> <span class="kt">Iterator</span> <span class="p">:</span> <span class="kt">IteratorProtocol</span>
+  <span class="p">}</span>
+  <span class="kd">protocol</span> <span class="kt">IteratorProtocol</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+</code></pre></div>            </div>
+
+          </div>
+  </details>
+      </li>
+      <li><strong>Compensate for weak type information</strong> to clarify a parameter’s role.
+        <details>
+  <summary>DETAIL</summary>
+  <div>
+
+            <p>Especially when a parameter type is NSObject, Any, AnyObject, or a fundamental type such Int or String, type information and context at the point of use may not fully convey intent. In this example, the declaration may be clear, but the use site is vague.</p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">❌</span>
+  <span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="n">_</span> <span class="nv">observer</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="k">for</span> <span class="nv">keyPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span>
+
+  <span class="n">grid</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="n">graphics</span><span class="p">)</span> <span class="c1">// vague</span>
+</code></pre></div>            </div>
+
+            <p>To restore clarity, <strong>precede each weakly typed parameter with a noun describing its role:</strong></p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">✅</span>
+  <span class="kd">func</span> <span class="nf">addObserver</span><span class="p">(</span><span class="n">_</span> <span class="nv">observer</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="n">forKeyPath</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span>
+  <span class="n">grid</span><span class="o">.</span><span class="nf">addObserver</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nv">forKeyPath</span><span class="p">:</span> <span class="n">graphics</span><span class="p">)</span> <span class="c1">// clear</span>
+</code></pre></div>            </div>
+
+          </div>
+  </details>
+      </li>
+    </ul>
+
+  </div>
+</details>
+
+<p>번역문</p>
+
+<p>.</p>
+
+<h2 id="strive-for-fluent-usage">Strive for Fluent Usage</h2>
+
+<details>
+<summary>Strive for Fluent Usage 원문보기</summary>
+<div>
+
+    <ul>
+      <li><strong>Prefer method and function names that make use sites form grammatical English phrases.</strong>
+        <details>
+  <summary>DETAIL</summary>
+  <div>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">✅</span>
+  <span class="n">x</span><span class="o">.</span><span class="nf">insert</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nv">at</span><span class="p">:</span> <span class="n">z</span><span class="p">)</span>          <span class="err">“</span><span class="n">x</span><span class="p">,</span> <span class="n">insert</span> <span class="n">y</span> <span class="n">at</span> <span class="n">z</span><span class="err">”</span>
+  <span class="n">x</span><span class="o">.</span><span class="nf">subViews</span><span class="p">(</span><span class="nv">havingColor</span><span class="p">:</span> <span class="n">y</span><span class="p">)</span>  <span class="err">“</span><span class="n">x</span><span class="err">'</span><span class="n">s</span> <span class="n">subviews</span> <span class="n">having</span> <span class="n">color</span> <span class="n">y</span><span class="err">”</span>
+  <span class="n">x</span><span class="o">.</span><span class="nf">capitalizingNouns</span><span class="p">()</span>       <span class="err">“</span><span class="n">x</span><span class="p">,</span> <span class="n">capitalizing</span> <span class="n">nouns</span><span class="err">”</span>
+</code></pre></div>            </div>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">❌</span>
+  <span class="n">x</span><span class="o">.</span><span class="nf">insert</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nv">position</span><span class="p">:</span> <span class="n">z</span><span class="p">)</span>
+  <span class="n">x</span><span class="o">.</span><span class="nf">subViews</span><span class="p">(</span><span class="nv">color</span><span class="p">:</span> <span class="n">y</span><span class="p">)</span>
+  <span class="n">x</span><span class="o">.</span><span class="nf">nounCapitalize</span><span class="p">()</span>
+</code></pre></div>            </div>
+
+            <p>It is acceptable for fluency to degrade after the first argument or two when those arguments are not central to the call’s meaning:</p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kt">AudioUnit</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">(</span>
+      <span class="nv">with</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span> 
+      <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">inProcess</span><span class="p">],</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="n">stopProgressBar</span><span class="p">)</span>
+</code></pre></div>            </div>
+
+          </div>
+  </details>
+      </li>
+      <li>
+        <p><strong>Begin names of factory methods with “make”,</strong> e.g. x.makeIterator().</p>
+      </li>
+      <li>The first argument to <strong>initializer and <a href="https://en.wikipedia.org/wiki/Factory_method_pattern">factory methods</a> calls</strong> should not form a phrase starting with the base name, e.g. x.makeWidget(cogCount: 47)
+        <details>
+  <summary>DETAIL</summary>
+  <div>
+
+            <p>For example, the first arguments to these calls do not read as part of the same phrase as the base name:</p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">✅</span>
+  <span class="k">let</span> <span class="nv">foreground</span> <span class="o">=</span> <span class="kt">Color</span><span class="p">(</span><span class="nv">red</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span> <span class="nv">green</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span> <span class="nv">blue</span><span class="p">:</span> <span class="mi">128</span><span class="p">)</span>
+  <span class="k">let</span> <span class="nv">newPart</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="nf">makeWidget</span><span class="p">(</span><span class="nv">gears</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="nv">spindles</span><span class="p">:</span> <span class="mi">14</span><span class="p">)</span>
+  <span class="k">let</span> <span class="nv">ref</span> <span class="o">=</span> <span class="kt">Link</span><span class="p">(</span><span class="nv">target</span><span class="p">:</span> <span class="n">destination</span><span class="p">)</span>
+</code></pre></div>            </div>
+
+            <p>In the following, the API author has tried to create grammatical continuity with the first argument.</p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">❌</span>
+  <span class="k">let</span> <span class="nv">foreground</span> <span class="o">=</span> <span class="kt">Color</span><span class="p">(</span><span class="nv">havingRGBValuesRed</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span> <span class="nv">green</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span> <span class="nv">andBlue</span><span class="p">:</span> <span class="mi">128</span><span class="p">)</span>
+  <span class="k">let</span> <span class="nv">newPart</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="nf">makeWidget</span><span class="p">(</span><span class="nv">havingGearCount</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="nv">andSpindleCount</span><span class="p">:</span> <span class="mi">14</span><span class="p">)</span>
+  <span class="k">let</span> <span class="nv">ref</span> <span class="o">=</span> <span class="kt">Link</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">destination</span><span class="p">)</span>
+</code></pre></div>            </div>
+
+            <p>In practice, this guideline along with those for argument labels means the first argument will have a label unless the call is performing a value preserving type conversion.</p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">let</span> <span class="nv">rgbForeground</span> <span class="o">=</span> <span class="kt">RGBColor</span><span class="p">(</span><span class="n">cmykForeground</span><span class="p">)</span>
+</code></pre></div>            </div>
+
+          </div>
+  </details>
+      </li>
+      <li>
+        <p><strong>Name functions and methods according to their side-effects</strong></p>
+
+        <ul>
+          <li>
+            <p>Those without side-effects should read as noun phrases, e.g. x.distance(to: y), i.successor().</p>
+          </li>
+          <li>
+            <p>Those with side-effects should read as imperative verb phrases, e.g., print(x), x.sort(), x.append(y).</p>
+          </li>
+          <li>
+            <p><strong>Name Mutating/nonmutating method pairs</strong> consistently. A mutating method will often have a nonmutating variant with similar semantics, but that returns a new value rather than updating an instance in-place.</p>
+
+            <ul>
+              <li>
+                <p>When the operation is <strong>naturally described by a verb,</strong> use the verb’s imperative for the mutating method and apply the “ed” or “ing” suffix to name its nonmutating counterpart.</p>
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th><strong>Mutating</strong></th>
+                      <th><strong>Nonmutating</strong></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>x.sort()</td>
+                      <td>z = x.sorted()</td>
+                    </tr>
+                    <tr>
+                      <td>x.append(y)</td>
+                      <td>z = x.appending(y)</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <details>
+  <summary>DETAIL</summary>
+  <div>
+
+                    <ul>
+                      <li>Prefer to name the nonmutating variant using the verb’s past participle (usually appending “ed”):</li>
+                    </ul>
+
+                    <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">/// Reverses `self` in-place.</span>
+  <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">reverse</span><span class="p">()</span>
+
+  <span class="c1">/// Returns a reversed copy of `self`.</span>
+  <span class="kd">func</span> <span class="nf">reversed</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">Self</span>
+  <span class="o">...</span>
+  <span class="n">x</span><span class="o">.</span><span class="nf">reverse</span><span class="p">()</span>
+  <span class="k">let</span> <span class="nv">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="nf">reversed</span><span class="p">()</span>
+</code></pre></div>                    </div>
+
+                    <ul>
+                      <li>When adding “ed” is not grammatical because the verb has a direct object, name the nonmutating variant using the verb’s present participle, by appending “ing.”</li>
+                    </ul>
+
+                    <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">/// Strips all the newlines from `self`</span>
+  <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">stripNewlines</span><span class="p">()</span>
+
+  <span class="c1">/// Returns a copy of `self` with all the newlines stripped.</span>
+  <span class="kd">func</span> <span class="nf">strippingNewlines</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span>
+  <span class="o">...</span>
+  <span class="n">s</span><span class="o">.</span><span class="nf">stripNewlines</span><span class="p">()</span>
+  <span class="k">let</span> <span class="nv">oneLine</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="nf">strippingNewlines</span><span class="p">()</span>
+</code></pre></div>                    </div>
+
+                  </div>
+  </details>
+              </li>
+              <li>
+                <p>When the operation is <strong>naturally described by a noun,</strong> use the noun for the nonmutating method and apply the “form” prefix to name its mutating counterpart.</p>
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th><strong>Nonmutating</strong></th>
+                      <th><strong>Mutating</strong></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>x = y.union(z)</td>
+                      <td>y.formUnion(z)</td>
+                    </tr>
+                    <tr>
+                      <td>j = c.successor(i)</td>
+                      <td>c.formSuccessor(&amp;i)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Uses of Boolean methods and properties should read as assertions about the receiver</strong> when the use is nonmutating, e.g. x.isEmpty, line1.intersects(line2).</p>
+      </li>
+      <li>
+        <p><strong>Protocols that describe what something is should read as nouns</strong> (e.g. Collection).</p>
+      </li>
+      <li>
+        <p><strong>Protocols that describe a capability should be named using the suffixes</strong> able, ible, <strong>or</strong> ing (e.g. Equatable, ProgressReporting).</p>
+      </li>
+      <li>The names of other <strong>types, properties, variables, and constants should read as nouns.</strong></li>
+    </ul>
+
+  </div>
+</details>
+
+<p>번역문</p>
+
+<p>.</p>
+
+<h2 id="use-terminology-well">Use Terminology Well</h2>
+
+<details>
+<summary>Use Terminology Well 원문보기</summary>
+<div>
+
+    <p><strong>Term of Art</strong>   <br />
+noun - a word or phrase that has a precise, specialized meaning within a particular field or profession.</p>
+
+    <ul>
+      <li>
+        <p><strong>Avoid obscure terms</strong> if a more common word conveys meaning just as well. Don’t say “epidermis” if “skin” will serve your purpose. Terms of art are an essential communication tool, but should only be used to capture crucial meaning that would otherwise be lost.</p>
+      </li>
+      <li><strong>Stick to the established meaning</strong> if you do use a term of art.
+        <details>
+  <summary>DETAIL</summary>
+  <div>
+
+            <p>The only reason to use a technical term rather than a more common word is that it precisely expresses something that would otherwise be ambiguous or unclear. Therefore, an API should use the term strictly in accordance with its accepted meaning.</p>
+
+            <ul>
+              <li>
+                <p><strong>Don’t surprise an expert</strong>: anyone already familiar with the term will be surprised and probably angered if we appear to have invented a new meaning for it.</p>
+              </li>
+              <li>
+                <p><strong>Don’t confuse a beginner</strong>: anyone trying to learn the term is likely to do a web search and find its traditional meaning.</p>
+              </li>
+            </ul>
+
+          </div>
+  </details>
+      </li>
+      <li>
+        <p><strong>Avoid abbreviations.</strong> Abbreviations, especially non-standard ones, are effectively terms-of-art, because understanding depends on correctly translating them into their non-abbreviated forms.</p>
+
+        <blockquote>
+          <p>The intended meaning for any abbreviation you use should be easily found by a web search.</p>
+        </blockquote>
+      </li>
+      <li><strong>Embrace precedent.</strong> Don’t optimize terms for the total beginner at the expense of conformance to existing culture.
+        <details>
+  <summary>DETAIL</summary>
+  <div>
+
+            <p>It is better to name a contiguous data structure Array than to use a simplified term such as List, even though a beginner might grasp the meaning of List more easily. Arrays are fundamental in modern computing, so every programmer knows—or will soon learn—what an array is. Use a term that most programmers are familiar with, and their web searches and questions will be rewarded.</p>
+
+            <p>Within a particular programming domain, such as mathematics, a widely precedented term such as sin(x) is preferable to an explanatory phrase such as verticalPositionOnUnitCircleAtOriginOfEndOfRadiusWithAngle(x). Note that in this case, precedent outweighs the guideline to avoid abbreviations: although the complete word is sine, “sin(x)” has been in common use among programmers for decades, and among mathematicians for centuries.</p>
+
+          </div>
+  </details>
+      </li>
+    </ul>
+
+  </div>
+</details>
+
+<p>번역문</p>
+:ET

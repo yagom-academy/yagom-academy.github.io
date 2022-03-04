@@ -1,0 +1,88 @@
+I"<h1 id="special-instructions">Special Instructions</h1>
+
+<details>
+<summary>Special Instructions 원문보기</summary>
+<div>
+
+    <ul>
+      <li><strong>Label tuple members and name closure parameters</strong> where they appear in your API.
+        <details>
+  <summary>DETAIL</summary>
+  <div>
+
+            <p>These names have explanatory power, can be referenced from documentation comments, and provide expressive access to tuple members.</p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">/// Ensure that we hold uniquely-referenced storage for at least</span>
+  <span class="c1">/// `requestedCapacity` elements.</span>
+  <span class="c1">///</span>
+  <span class="c1">/// If more storage is needed, `allocate` is called with</span>
+  <span class="c1">/// `byteCount` equal to the number of maximally-aligned</span>
+  <span class="c1">/// bytes to allocate.</span>
+  <span class="c1">///</span>
+  <span class="c1">/// - Returns:</span>
+  <span class="c1">///   - reallocated: `true` iff a new block of memory</span>
+  <span class="c1">///     was allocated.</span>
+  <span class="c1">///   - capacityChanged: `true` iff `capacity` was updated.</span>
+  <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">ensureUniqueStorage</span><span class="p">(</span>
+      <span class="n">minimumCapacity</span> <span class="nv">requestedCapacity</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> 
+      <span class="nv">allocate</span><span class="p">:</span> <span class="p">(</span><span class="n">_</span> <span class="nv">byteCount</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UnsafePointer</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nv">reallocated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">capacityChanged</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span>
+</code></pre></div>            </div>
+
+            <p>Names used for closure parameters should be chosen like <code class="language-plaintext highlighter-rouge">parameter names</code> for top-level functions. Labels for closure arguments that appear at the call site are not supported.</p>
+
+          </div>
+  </details>
+      </li>
+      <li><strong>Take extra care with unconstrained polymorphism</strong> (e.g. Any, AnyObject, and unconstrained generic parameters) to avoid ambiguities in overload sets.
+        <details>
+  <summary>DETAIL</summary>
+  <div>
+
+            <p>For example, consider this overload set:</p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">❌</span>
+  <span class="kd">struct</span> <span class="kt">Array</span> <span class="p">{</span>
+      <span class="c1">/// Inserts `newElement` at `self.endIndex`.</span>
+      <span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">append</span><span class="p">(</span><span class="n">_</span> <span class="nv">newElement</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span>
+
+      <span class="c1">/// Inserts the contents of `newElements`, in order, at</span>
+      <span class="c1">/// `self.endIndex`.</span>
+      <span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">append</span><span class="p">(</span><span class="n">_</span> <span class="nv">newElements</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span>
+          <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Generator</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">Element</span>
+  <span class="p">}</span>
+</code></pre></div>            </div>
+
+            <p>These methods form a semantic family, and the argument types appear at first to be sharply distinct. However, when Element is Any, a single element can have the same type as a sequence of elements.</p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">❌</span>
+  <span class="k">var</span> <span class="nv">values</span><span class="p">:</span> <span class="p">[</span><span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s">"a"</span><span class="p">]</span>
+  <span class="n">values</span><span class="o">.</span><span class="nf">append</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span> <span class="c1">// [1, "a", [2, 3, 4]] or [1, "a", 2, 3, 4]?</span>
+</code></pre></div>            </div>
+
+            <p>To eliminate the ambiguity, name the second overload more explicitly.</p>
+
+            <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="err">✅</span>
+  <span class="kd">struct</span> <span class="kt">Array</span> <span class="p">{</span>
+      <span class="c1">/// Inserts `newElement` at `self.endIndex`.</span>
+      <span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">append</span><span class="p">(</span><span class="n">_</span> <span class="nv">newElement</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span>
+
+      <span class="c1">/// Inserts the contents of `newElements`, in order, at</span>
+      <span class="c1">/// `self.endIndex`.</span>
+      <span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">append</span><span class="p">(</span><span class="n">contentsOf</span> <span class="nv">newElements</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span>
+          <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Generator</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">Element</span>
+  <span class="p">}</span>
+</code></pre></div>            </div>
+
+            <p>Notice how the new name better matches the documentation comment. In this case, the act of writing the documentation comment actually brought the issue to the API author’s attention.</p>
+
+          </div>
+  </details>
+      </li>
+    </ul>
+
+  </div>
+</details>
+
+<p>번역문</p>
+:ET

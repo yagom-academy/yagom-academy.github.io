@@ -1,0 +1,187 @@
+I"�9<h1 id="fundamentals">Fundamentals</h1>
+
+<details>
+<summary>Fundametals 원문보기</summary>
+<div>
+
+    <ul>
+      <li>
+        <p><strong>Clarity at the point of use</strong> is your most important goal. Entities such as methods and properties are declared only once but used repeatedly. Design APIs to make those uses clear and concise. When evaluating a design, reading a declaration is seldom sufficient; always examine a use case to make sure it looks clear in context.</p>
+      </li>
+      <li>
+        <p><strong>Clarity is more important than brevity.</strong> Although Swift code can be compact, it is a non-goal to enable the smallest possible code with the fewest characters. Brevity in Swift code, where it occurs, is a side-effect of the strong type system and features that naturally reduce boilerplate.</p>
+      </li>
+      <li>
+        <p><strong>Write a documentation comment for every declaration.</strong> Insights gained by writing documentation can have a profound impact on your design, so don’t put it off.</p>
+
+        <blockquote>
+          <p>If you are having trouble describing your API’s functionality in simple terms, you may have designed the wrong API.</p>
+        </blockquote>
+
+        <details>
+<summary>DETAIL</summary>
+<div>
+
+            <ul>
+              <li>
+                <p><strong>Use Swift’s dialect of Markdown.</strong></p>
+              </li>
+              <li>
+                <p><strong>Begin with a summary</strong> that describes the entity being declared. Often, an API can be completely understood from its declaration and its summary.</p>
+
+                <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// Returns a "view" of `self` containing the same elements in</span>
+<span class="c1">/// reverse order.</span>
+<span class="kd">func</span> <span class="nf">reversed</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">ReverseCollection</span>
+</code></pre></div>                </div>
+
+                <details>
+<summary>DETAIL</summary>
+<div>
+
+                    <ul>
+                      <li>
+                        <p><strong>Focus on the summary</strong>; it’s the most important part. Many excellent documentation comments consist of nothing more than a great summary.</p>
+                      </li>
+                      <li>
+                        <p><strong>Use a single sentence fragment</strong> if possible, ending with a period. Do not use a complete sentence.</p>
+                      </li>
+                      <li>
+                        <p><strong>Describe what a function or method does and what it <em>returns</em>,</strong> omitting null effects and Void returns:</p>
+                      </li>
+                    </ul>
+
+                    <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// Inserts `newHead` at the beginning of `self`.</span>
+<span class="k">mutating</span> <span class="kd">func</span> <span class="nf">prepend</span><span class="p">(</span><span class="n">_</span> <span class="nv">newHead</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+
+<span class="c1">/// Returns a `List` containing `head` followed by the elements</span>
+<span class="c1">/// of `self`.</span>
+<span class="kd">func</span> <span class="nf">prepending</span><span class="p">(</span><span class="n">_</span> <span class="nv">head</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">List</span>
+
+<span class="c1">/// Removes and returns the first element of `self` if non-empty;</span>
+<span class="c1">/// returns `nil` otherwise.</span>
+<span class="k">mutating</span> <span class="kd">func</span> <span class="nf">popFirst</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Element</span><span class="p">?</span>
+</code></pre></div>                    </div>
+
+                    <p>Note: in rare cases like popFirst above, the summary is formed of multiple sentence fragments separated by semicolons.</p>
+
+                    <ul>
+                      <li><strong>Describe what a subscript accesses</strong>:
+                        <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// Accesses the `index`th element.</span>
+<span class="nf">subscript</span><span class="p">(</span><span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Element</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span>
+</code></pre></div>                        </div>
+                      </li>
+                      <li><strong>Describe what an initializer creates</strong>:
+                        <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// Creates an instance containing `n` repetitions of `x`.</span>
+<span class="nf">init</span><span class="p">(</span><span class="n">count</span> <span class="nv">n</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">repeatedElement</span> <span class="nv">x</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span>
+</code></pre></div>                        </div>
+                      </li>
+                      <li>For all other declarations, <strong>describe what the declared entity <em>is</em>.</strong>
+                        <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// A collection that supports equally efficient insertion/removal</span>
+<span class="c1">/// at any position.</span>
+<span class="kd">struct</span> <span class="kt">List</span> <span class="p">{</span>
+
+<span class="c1">/// The element at the beginning of `self`, or `nil` if self is</span>
+<span class="c1">/// empty.</span>
+<span class="k">var</span> <span class="nv">first</span><span class="p">:</span> <span class="kt">Element</span><span class="p">?</span>
+<span class="o">...</span>
+</code></pre></div>                        </div>
+                      </li>
+                    </ul>
+
+                  </div>
+</details>
+              </li>
+              <li>
+                <p><strong>Optionally, continue</strong> with one or more paragraphs and bullet items. Paragraphs are separated by blank lines and use complete sentences.</p>
+
+                <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// Writes the textual representation of each    ← Summary</span>
+<span class="c1">/// element of `items` to the standard output.</span>
+<span class="c1">///                                              ← Blank line</span>
+<span class="c1">/// The textual representation for each item `x` ← Additional discussion</span>
+<span class="c1">/// is generated by the expression `String(x)`.</span>
+<span class="c1">///</span>
+<span class="c1">/// - Parameter separator: text to be printed    ⎫</span>
+<span class="c1">///   between items.                             ⎟</span>
+<span class="c1">/// - Parameter terminator: text to be printed   ⎬ Parameters section</span>
+<span class="c1">///   at the end.                                ⎟</span>
+<span class="c1">///                                              ⎭</span>
+<span class="c1">/// - Note: To print without a trailing          ⎫</span>
+<span class="c1">///   newline, pass `terminator: ""`             ⎟</span>
+<span class="c1">///                                              ⎬ Symbol commands</span>
+<span class="c1">/// - SeeAlso: `CustomDebugStringConvertible`,   ⎟</span>
+<span class="c1">///   `CustomStringConvertible`, `debugPrint`.   ⎭</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">print</span><span class="p">(</span>
+  <span class="n">_</span> <span class="nv">items</span><span class="p">:</span> <span class="kt">Any</span><span class="o">...</span><span class="p">,</span> <span class="nv">separator</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">" "</span><span class="p">,</span> <span class="nv">terminator</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div>                </div>
+
+                <details>
+<summary>DETAIL</summary>
+<div>
+
+                    <ul>
+                      <li>
+                        <p><strong>Use recognized <a href="https://developer.apple.com/library/archive/documentation/Xcode/Reference/xcode_markup_formatting_ref/SymbolDocumentation.html#//apple_ref/doc/uid/TP40016497-CH51-SW1">symbol documentation markup elements</a></strong> to add information beyond the summary, whenever appropriate.</p>
+                      </li>
+                      <li>
+                        <p><strong>Know and use recognized bullet items with <a href="https://developer.apple.com/library/archive/documentation/Xcode/Reference/xcode_markup_formatting_ref/SymbolDocumentation.html#//apple_ref/doc/uid/TP40016497-CH51-SW13">symbol command syntax</a>.</strong> Popular development tools such as Xcode give special treatment to bullet items that start with the following keywords:</p>
+                      </li>
+                    </ul>
+
+                    <table>
+                      <thead>
+                        <tr>
+                          <th><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Attention.html">Attention</a></th>
+                          <th><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Author.html">Author</a></th>
+                          <th><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Authors.html">Authors</a></th>
+                          <th><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Bug.html">Bug</a></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Complexity.html">Complexity</a></td>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Copyright.html">Copyright</a></td>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Date.html">Date</a></td>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Experiment.html">Experiment</a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Important.html">Important</a></td>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Invariant.html">Invariant</a></td>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Note.html">Note</a></td>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Parameter.html">Parameter</a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Parameters.html">Parameters</a></td>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Postcondition.html">Postcondition</a></td>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Precondition.html">Precondition</a></td>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Remark.html">Remark</a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Requires.html">Requires</a></td>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Returns.html">Returns</a></td>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/SeeAlso.html">SeeAlso</a></td>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Since.html">Since</a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Throws.html">Throws</a></td>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Todo.html">Todo</a></td>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Version.html">Version</a></td>
+                          <td><a href="https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Warning.html">Warning</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+</details>
+              </li>
+            </ul>
+
+          </div>
+</details>
+      </li>
+    </ul>
+
+  </div>
+</details>
+
+<p>번역문</p>
+:ET
