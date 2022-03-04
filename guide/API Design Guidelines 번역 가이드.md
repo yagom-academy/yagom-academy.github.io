@@ -1,4 +1,7 @@
-
+---
+layout: default
+title: 
+---
 
 # API Design Guidelines 번역 가이드
 
