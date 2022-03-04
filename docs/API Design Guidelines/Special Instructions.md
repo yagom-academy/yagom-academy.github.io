@@ -7,16 +7,9 @@ nav_order: 4
 
 # Special Instructions
 
-<details>
-<summary>Special Instructions 원문보기</summary>
-<div markdown="1">
+- <i><span style="color: #C0C0C0">**Label tuple members and name closure parameters** where they appear in your API.</span></i>
 
-- **Label tuple members and name closure parameters** where they appear in your API.
-    <details>
-    <summary>DETAIL</summary>
-    <div markdown="1">
-
-    These names have explanatory power, can be referenced from documentation comments, and provide expressive access to tuple members.
+    <i><span style="color: #C0C0C0">These names have explanatory power, can be referenced from documentation comments, and provide expressive access to tuple members.</span></i>
 
     ```swift
     /// Ensure that we hold uniquely-referenced storage for at least
@@ -36,19 +29,12 @@ nav_order: 4
     ) -> (reallocated: Bool, capacityChanged: Bool)
     ```
 
-    Names used for closure parameters should be chosen like `parameter names` for top-level functions. Labels for closure arguments that appear at the call site are not supported.
+    <i><span style="color: #C0C0C0">Names used for closure parameters should be chosen like `parameter names` for top-level functions. Labels for closure arguments that appear at the call site are not supported.</span></i>
     
 
-    </div>
-    </details>
+- <i><span style="color: #C0C0C0">**Take extra care with unconstrained polymorphism** (e.g. Any, AnyObject, and unconstrained generic parameters) to avoid ambiguities in overload sets.</span></i>
 
-
-- **Take extra care with unconstrained polymorphism** (e.g. Any, AnyObject, and unconstrained generic parameters) to avoid ambiguities in overload sets.
-    <details>
-    <summary>DETAIL</summary>
-    <div markdown="1">
-
-    For example, consider this overload set:
+    <i><span style="color: #C0C0C0">For example, consider this overload set:</span></i>
 
     ```swift
     ❌
@@ -63,7 +49,7 @@ nav_order: 4
     }
     ```
 
-    These methods form a semantic family, and the argument types appear at first to be sharply distinct. However, when Element is Any, a single element can have the same type as a sequence of elements.
+    <i><span style="color: #C0C0C0">These methods form a semantic family, and the argument types appear at first to be sharply distinct. However, when Element is Any, a single element can have the same type as a sequence of elements.</span></i>
 
     ```swift
     ❌
@@ -71,7 +57,7 @@ nav_order: 4
     values.append([2, 3, 4]) // [1, "a", [2, 3, 4]] or [1, "a", 2, 3, 4]?
     ```
 
-    To eliminate the ambiguity, name the second overload more explicitly.
+    <i><span style="color: #C0C0C0">To eliminate the ambiguity, name the second overload more explicitly.</span></i>
 
     ```swift
     ✅
@@ -86,12 +72,5 @@ nav_order: 4
     }
     ```
 
-    Notice how the new name better matches the documentation comment. In this case, the act of writing the documentation comment actually brought the issue to the API author’s attention.
+    <i><span style="color: #C0C0C0">Notice how the new name better matches the documentation comment. In this case, the act of writing the documentation comment actually brought the issue to the API author’s attention.</span><i>
 
-    </div>
-    </details>
-
-</div>
-</details>
-
-번역문

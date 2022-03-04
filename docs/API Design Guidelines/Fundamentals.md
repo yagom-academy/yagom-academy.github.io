@@ -7,25 +7,17 @@ nav_order: 1
 
 # Fundamentals
 
-<details>
-<summary>Fundametals 원문보기</summary>
-<div markdown="1">
+- <i><span style="color: #C0C0C0">**Clarity at the point of use** is your most important goal. Entities such as methods and properties are declared only once but used repeatedly. Design APIs to make those uses clear and concise. When evaluating a design, reading a declaration is seldom sufficient; always examine a use case to make sure it looks clear in context.</span></i>
 
-- **Clarity at the point of use** is your most important goal. Entities such as methods and properties are declared only once but used repeatedly. Design APIs to make those uses clear and concise. When evaluating a design, reading a declaration is seldom sufficient; always examine a use case to make sure it looks clear in context.
+- <i><span style="color: #C0C0C0">**Clarity is more important than brevity.** Although Swift code can be compact, it is a non-goal to enable the smallest possible code with the fewest characters. Brevity in Swift code, where it occurs, is a side-effect of the strong type system and features that naturally reduce boilerplate.</span></i>
 
-- **Clarity is more important than brevity.** Although Swift code can be compact, it is a non-goal to enable the smallest possible code with the fewest characters. Brevity in Swift code, where it occurs, is a side-effect of the strong type system and features that naturally reduce boilerplate.
+- <i><span style="color: #C0C0C0">**Write a documentation comment for every declaration.** Insights gained by writing documentation can have a profound impact on your design, so don’t put it off.</span></i>   
 
-- **Write a documentation comment for every declaration.** Insights gained by writing documentation can have a profound impact on your design, so don’t put it off.   
+  > <i><span style="color: #C0C0C0">If you are having trouble describing your API’s functionality in simple terms, you may have designed the wrong API.</span></i>
 
-  > If you are having trouble describing your API’s functionality in simple terms, you may have designed the wrong API.
+  - <i><span style="color: #C0C0C0">**Use Swift’s dialect of Markdown.**</span></i>
 
-  <details>
-  <summary>DETAIL</summary>
-  <div markdown="1">   
-
-  - **Use Swift’s dialect of Markdown.**
-
-  - **Begin with a summary** that describes the entity being declared. Often, an API can be completely understood from its declaration and its summary.
+  - <i><span style="color: #C0C0C0">**Begin with a summary** that describes the entity being declared. Often, an API can be completely understood from its declaration and its summary.</span></i>
 
     ```swift
     /// Returns a "view" of `self` containing the same elements in
@@ -33,15 +25,11 @@ nav_order: 1
     func reversed() -> ReverseCollection
     ```
 
-    <details>
-    <summary>DETAIL</summary>
-    <div markdown="1">
+    - <i><span style="color: #C0C0C0">**Focus on the summary**; it’s the most important part. Many excellent documentation comments consist of nothing more than a great summary.</span></i>
 
-    - **Focus on the summary**; it’s the most important part. Many excellent documentation comments consist of nothing more than a great summary.
+    - <i><span style="color: #C0C0C0">**Use a single sentence fragment** if possible, ending with a period. Do not use a complete sentence.</span></i>
 
-    - **Use a single sentence fragment** if possible, ending with a period. Do not use a complete sentence.
-
-    - **Describe what a function or method does and what it *returns*,** omitting null effects and Void returns:
+    - <i><span style="color: #C0C0C0">**Describe what a function or method does and what it *returns*,** omitting null effects and Void returns:</span></i>
 
     ```swift
     /// Inserts `newHead` at the beginning of `self`.
@@ -56,21 +44,21 @@ nav_order: 1
     mutating func popFirst() -> Element?
     ```
 
-    Note: in rare cases like popFirst above, the summary is formed of multiple sentence fragments separated by semicolons.
+    <i><span style="color: #C0C0C0">Note: in rare cases like popFirst above, the summary is formed of multiple sentence fragments separated by semicolons.</span></i>
 
-    - **Describe what a subscript accesses**:
+    - <i><span style="color: #C0C0C0">**Describe what a subscript accesses**:</span></i>
     ```swift
     /// Accesses the `index`th element.
     subscript(index: Int) -> Element { get set }
     ```
 
-    - **Describe what an initializer creates**:
+    - <i><span style="color: #C0C0C0">**Describe what an initializer creates**:</span></i>
     ```swift
     /// Creates an instance containing `n` repetitions of `x`.
     init(count n: Int, repeatedElement x: Element)
     ```
 
-    - For all other declarations, **describe what the declared entity *is*.**
+    - <i><span style="color: #C0C0C0">For all other declarations, **describe what the declared entity *is*.**</span></i>
     ```swift
     /// A collection that supports equally efficient insertion/removal
     /// at any position.
@@ -82,10 +70,8 @@ nav_order: 1
       ...
     ```
 
-    </div>
-    </details>
 
-  - **Optionally, continue** with one or more paragraphs and bullet items. Paragraphs are separated by blank lines and use complete sentences.
+  - <i><span style="color: #C0C0C0">**Optionally, continue** with one or more paragraphs and bullet items. Paragraphs are separated by blank lines and use complete sentences.</span></i>
 
     ```swift
     /// Writes the textual representation of each    ← Summary
@@ -108,14 +94,9 @@ nav_order: 1
       _ items: Any..., separator: String = " ", terminator: String = "\n")
     ```
 
+    - <i><span style="color: #C0C0C0">**Use recognized [symbol documentation markup elements](https://developer.apple.com/library/archive/documentation/Xcode/Reference/xcode_markup_formatting_ref/SymbolDocumentation.html#//apple_ref/doc/uid/TP40016497-CH51-SW1)** to add information beyond the summary, whenever appropriate.</span></i>
 
-    <details>
-    <summary>DETAIL</summary>
-    <div markdown="1">
-
-    - **Use recognized [symbol documentation markup elements](https://developer.apple.com/library/archive/documentation/Xcode/Reference/xcode_markup_formatting_ref/SymbolDocumentation.html#//apple_ref/doc/uid/TP40016497-CH51-SW1)** to add information beyond the summary, whenever appropriate.
-
-    - **Know and use recognized bullet items with [symbol command syntax](https://developer.apple.com/library/archive/documentation/Xcode/Reference/xcode_markup_formatting_ref/SymbolDocumentation.html#//apple_ref/doc/uid/TP40016497-CH51-SW13).** Popular development tools such as Xcode give special treatment to bullet items that start with the following keywords:
+    - <i><span style="color: #C0C0C0">**Know and use recognized bullet items with [symbol command syntax](https://developer.apple.com/library/archive/documentation/Xcode/Reference/xcode_markup_formatting_ref/SymbolDocumentation.html#//apple_ref/doc/uid/TP40016497-CH51-SW13).** Popular development tools such as Xcode give special treatment to bullet items that start with the following keywords:</span></i>
 
     |  [Attention](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Attention.html) | [Author](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Author.html)        | [Authors](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Authors.html)      | [Bug](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Bug.html)        |
     |------------|---------------|--------------|------------|
@@ -124,15 +105,3 @@ nav_order: 1
     | [Parameters](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Parameters.html) | [Postcondition](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Postcondition.html) | [Precondition](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Precondition.html) | [Remark](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Remark.html)     |
     | [Requires](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Requires.html)   | [Returns](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Returns.html)       | [SeeAlso](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/SeeAlso.html)      | [Since](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Since.html)      |
     | [Throws](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Throws.html)     | [Todo](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Todo.html)          | [Version](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Version.html)      | [Warning](https://developer.apple.com/library/prerelease/mac/documentation/Xcode/Reference/xcode_markup_formatting_ref/Warning.html)    |
-
-    </div>
-    </details>
-
-
-  </div>
-  </details>
-
-</div>
-</details>
-
-번역문
