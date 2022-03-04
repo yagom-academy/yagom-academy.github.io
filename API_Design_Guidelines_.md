@@ -1,7 +1,11 @@
+
 ---
 layout: default
 title: 
+nav_order: 99
+permalink: /
 ---
+
 
 # API Design Guidelines 번역 가이드
 
