@@ -7,13 +7,14 @@
 
 # 🐻 야곰 아카데미 공유 문서 참여 방법
 
-안녕하세요. `swift-doc-kor`에 함께 해주셔서 감사합니다.   `swift-doc-kor`는 누구나 참여할 수 있습니다. 멋진 공유의 장을 만들어보아요! 참여 방법은 아래 가이드를 차근차근 확인해주세요 🙂
+안녕하세요. `swift-doc-kor`에 함께 해주셔서 감사합니다.   
+`swift-doc-kor`는 누구나 참여할 수 있습니다. 멋진 공유의 장을 만들어보아요! 참여 방법은 아래 가이드를 차근차근 확인해주세요 🙂
 
 <br>
 
 ## 📮  필독 사항
 
-- **반드시 `Wiki` 에서 용어를 참고하여 정확하고 일관된 용어를 사용합니다.**
+- **반드시 [`Wiki`](https://github.com/yagom-academy/yagom-academy.github.io/wiki) 에서 용어를 참고하여 정확하고 일관된 용어를 사용합니다.**
 - `-니다.` 체를 사용합니다.
 - 가능하면 번역체가 아닌 한국어 표현으로 번역합니다.
     
@@ -76,7 +77,7 @@
 - 이슈를 기록한 후, 저장소를 자신의 저장소로 Fork 합니다. 이미 저장소를 Fork한 상태라면 자신의 저장소로 바로 이동하면 됩니다.
 - 로컬에서 작업할 브랜치와 디렉토리 및 파일(필요하다면)을 생성하여 작업합니다.
 - 브랜치와 커밋 컨벤션은 반드시 `필독사항의 규칙`을 따라주세요.
-- **작업할 때 반드시 `[Wiki](https://github.com/yagom-academy/yagom-academy.github.io/wiki)` 를 참고하여 정확하고 통일된 용어를 사용합니다.**
+- **작업할 때 반드시 [`Wiki`](https://github.com/yagom-academy/yagom-academy.github.io/wiki) 를 참고하여 정확하고 통일된 용어를 사용합니다.**
 - 내가 작성(번역)한 문장을 소리내어 읽어보았을 때 숨이 차거나 부자연스럽다면 문장을 짧게 끊어봐도 좋습니다.
 - API Design Guidelines 문서 작업시 [`API Design Guidelines 번역 가이드 문서`](https://github.com/yagom-academy/yagom-academy.github.io/blob/main/guide/API%20Design%20Guidelines%20번역%20가이드.md)를 참고해주세요.
 
