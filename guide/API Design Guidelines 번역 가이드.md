@@ -32,7 +32,7 @@ published: false
 
 ### 🔎 공유 문서 최종
 
-<img alt="image" src="https://user-images.githubusercontent.com/73867548/156736178-343ea911-128e-4aba-99d6-08dee950d2ff.png">
+<img alt="image" src="https://user-images.githubusercontent.com/73867548/156738428-3c316d51-28af-4921-83de-5785c6d3a50a.png">
 
 
 
