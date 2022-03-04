@@ -10,41 +10,28 @@ nav_order: 3
 
 ## General Conventions
 
-<details>
-<summary>General Conventions 원문보기</summary>
-<div markdown="1">
+- <i><span style="color: #C0C0C0">**Document the complexity of any computed property that is not O(1).** People often assume that property access involves no significant computation, because they have stored properties as a mental model. Be sure to alert them when that assumption may be violated.</span></i>
 
-- **Document the complexity of any computed property that is not O(1).** People often assume that property access involves no significant computation, because they have stored properties as a mental model. Be sure to alert them when that assumption may be violated.
+- <i><span style="color: #C0C0C0">**Prefer methods and properties to free functions.** Free functions are used only in special cases:</span></i>
 
-- **Prefer methods and properties to free functions.** Free functions are used only in special cases:
-    <details>
-    <summary>DETAIL</summary>
-    <div markdown="1">
-
-    1. When there’s no obvious self:
+    1. <i><span style="color: #C0C0C0">When there’s no obvious self:</span></i>
         ```swift
         min(x, y, z)
         ```
 
-    2. When the function is an unconstrained generic:
+    2. <i><span style="color: #C0C0C0">When the function is an unconstrained generic:</span></i>
         ```swift
         print(x)
         ```
 
-    3. When function syntax is part of the established domain notation:
+    3. <i><span style="color: #C0C0C0">When function syntax is part of the established domain notation:</span></i>
         ```swift
         sin(x)
         ```
 
-    </div>
-    </details>
+- <i><span style="color: #C0C0C0">**Follow case conventions.** Names of types and protocols are UpperCamelCase. Everything else is lowerCamelCase.</span></i>
 
-- **Follow case conventions.** Names of types and protocols are UpperCamelCase. Everything else is lowerCamelCase.
-    <details>
-    <summary>DETAIL</summary>
-    <div markdown="1">
-
-    [Acronyms and initialisms](https://en.wikipedia.org/wiki/Acronym) that commonly appear as all upper case in American English should be uniformly up- or down-cased according to case conventions:
+    <i><span style="color: #C0C0C0">[Acronyms and initialisms](https://en.wikipedia.org/wiki/Acronym) that commonly appear as all upper case in American English should be uniformly up- or down-cased according to case conventions:</span></i>
 
     ```swift
     var utf8Bytes: [UTF8.CodeUnit]
@@ -52,22 +39,16 @@ nav_order: 3
     var userSMTPServer: SecureSMTPServer
     ```
 
-    Other acronyms should be treated as ordinary words:
+    <i><span style="color: #C0C0C0">Other acronyms should be treated as ordinary words:</span></i>
 
     ```swift
     var radarDetector: RadarScanner
     var enjoysScubaDiving = true
     ```
 
-    </div>
-    </details>
+- <i><span style="color: #C0C0C0">**Methods can share a base name** when they share the same basic meaning or when they operate in distinct domains.</span></i>
 
-- **Methods can share a base name** when they share the same basic meaning or when they operate in distinct domains.
-    <details>
-    <summary>DETAIL</summary>
-    <div markdown="1">
-
-    For example, the following is encouraged, since the methods do essentially the same things:
+    <i><span style="color: #C0C0C0">For example, the following is encouraged, since the methods do essentially the same things:</span></i>
 
     ```swift
     ✅
@@ -83,7 +64,7 @@ nav_order: 3
     }
     ```
 
-    And since geometric types and collections are separate domains, this is also fine in the same program:
+    <i><span style="color: #C0C0C0">And since geometric types and collections are separate domains, this is also fine in the same program:</span></i>
 
     ```swift
     ✅
@@ -94,7 +75,7 @@ nav_order: 3
     }
     ```
 
-    However, these index methods have different semantics, and should have been named differently:
+    <i><span style="color: #C0C0C0">However, these index methods have different semantics, and should have been named differently:</span></i>
 
     ```swift
     ❌
@@ -107,7 +88,7 @@ nav_order: 3
     }
     ```
 
-    Lastly, avoid “overloading on return type” because it causes ambiguities in the presence of type inference.
+    <i><span style="color: #C0C0C0">Lastly, avoid “overloading on return type” because it causes ambiguities in the presence of type inference.</span></i>
 
     ```swift
     ❌
@@ -122,33 +103,18 @@ nav_order: 3
     }
     ```
 
-    </div>
-    </details>
 
-</div>
-</details>
 
-번역문
-
-.
 
 ## Parameters
-
-<details>
-<summary>Parameters 원문보기</summary>
-<div markdown="1">
-
 
 ```swift
 func move(from start: Point, to end: Point)
 ```
 
-- **Choose parameter names to serve documentation.** Even though parameter names do not appear at a function or method’s point of use, they play an important explanatory role.
-    <details>
-    <summary>DETAIL</summary>
-    <div markdown="1">
+- <i><span style="color: #C0C0C0">**Choose parameter names to serve documentation.** Even though parameter names do not appear at a function or method’s point of use, they play an important explanatory role.</span></i>
 
-    Choose these names to make documentation easy to read. For example, these names make documentation read naturally:
+    <i><span style="color: #C0C0C0">Choose these names to make documentation easy to read. For example, these names make documentation read naturally:</span></i>
 
     ```swift
     ✅
@@ -160,7 +126,7 @@ func move(from start: Point, to end: Point)
     mutating func replaceRange(_ subRange: Range, with newElements: [E])
     ```
 
-    These, however, make the documentation awkward and ungrammatical:
+    <i><span style="color: #C0C0C0">These, however, make the documentation awkward and ungrammatical:</span></i>
 
     ```swift
     ❌
@@ -173,15 +139,10 @@ func move(from start: Point, to end: Point)
     mutating func replaceRange(_ r: Range, with: [E])
     ```
 
-    </div>
-    </details>
 
-- **Take advantage of defaulted parameters** when it simplifies common uses. Any parameter with a single commonly-used value is a candidate for a default.
-    <details>
-    <summary>DETAIL</summary>
-    <div markdown="1">
+- <i><span style="color: #C0C0C0">**Take advantage of defaulted parameters** when it simplifies common uses. Any parameter with a single commonly-used value is a candidate for a default.</span></i>
 
-    Default arguments improve readability by hiding irrelevant information. For example:
+    <i><span style="color: #C0C0C0">Default arguments improve readability by hiding irrelevant information. For example:</span></i>
 
     ```swift
     ❌
@@ -189,14 +150,14 @@ func move(from start: Point, to end: Point)
     royalFamilyName, options: [], range: nil, locale: nil)
     ```
 
-    can become the much simpler:
+    <i><span style="color: #C0C0C0">can become the much simpler:</span><i>
 
     ```swift
     ✅
     let order = lastName.compare(royalFamilyName)
     ```
 
-    Default arguments are generally preferable to the use of method families, because they impose a lower cognitive burden on anyone trying to understand the API.
+    <i><span style="color: #C0C0C0">Default arguments are generally preferable to the use of method families, because they impose a lower cognitive burden on anyone trying to understand the API.</span></i>
 
     ```swift
     ✅
@@ -209,7 +170,7 @@ func move(from start: Point, to end: Point)
     }
     ```
 
-    The above may not be simple, but it is much simpler than:
+    <i><span style="color: #C0C0C0">The above may not be simple, but it is much simpler than:</span></i>
 
     ```swift
     ❌
@@ -228,25 +189,14 @@ func move(from start: Point, to end: Point)
     }
     ```
 
-    Every member of a method family needs to be separately documented and understood by users. To decide among them, a user needs to understand all of them, and occasional surprising relationships—for example, foo(bar: nil) and foo() aren’t always synonyms—make this a tedious process of ferreting out minor differences in mostly identical documentation. Using a single method with defaults provides a vastly superior programmer experience.
+    <i><span style="color: #C0C0C0">Every member of a method family needs to be separately documented and understood by users. To decide among them, a user needs to understand all of them, and occasional surprising relationships—for example, foo(bar: nil) and foo() aren’t always synonyms—make this a tedious process of ferreting out minor differences in mostly identical documentation. Using a single method with defaults provides a vastly superior programmer experience.</span></i>
 
-    </div>
-    </details>
 
-- **Prefer to locate parameters with defaults toward the end** of the parameter list. Parameters without defaults are usually more essential to the semantics of a method, and provide a stable initial pattern of use where methods are invoked.
+- <i><span style="color: #C0C0C0">**Prefer to locate parameters with defaults toward the end** of the parameter list. Parameters without defaults are usually more essential to the semantics of a method, and provide a stable initial pattern of use where methods are invoked.</span></i>
 
-</div>
-</details>
 
-번역문
-
-.
 
 ## Argument Labels
-
-<details>
-<summary>Argument Labels 원문보기</summary>
-<div markdown="1">
 
 
 ```swift
@@ -254,14 +204,11 @@ func move(from start: Point, to end: Point)
 x.move(from: x, to: y) 
 ```
 
-- **Omit all labels when arguments can’t be usefully distinguished,** e.g. min(number1, number2), zip(sequence1, sequence2).
+- <i><span style="color: #C0C0C0">**Omit all labels when arguments can’t be usefully distinguished,** e.g. min(number1, number2), zip(sequence1, sequence2).</span></i>
 
-- **In initializers that perform value preserving type conversions, omit the first argument label,** e.g. Int64(someUInt32)
-    <details>
-    <summary>DETAIL</summary>
-    <div markdown="1">
+- <i><span style="color: #C0C0C0">**In initializers that perform value preserving type conversions, omit the first argument label,** e.g. Int64(someUInt32)</span></i>
 
-    The first argument should always be the source of the conversion.
+    <i><span style="color: #C0C0C0">The first argument should always be the source of the conversion.</span></i>
 
     ```swift
     extension String {
@@ -275,7 +222,7 @@ x.move(from: x, to: y)
     text += String(veryLargeNumber, radix: 16)
     ```
 
-    In “narrowing” type conversions, though, a label that describes the narrowing is recommended.
+    <i><span style="color: #C0C0C0">In “narrowing” type conversions, though, a label that describes the narrowing is recommended.</span></i>
 
     ```swift
     extension UInt32 {
@@ -289,19 +236,15 @@ x.move(from: x, to: y)
     }
     ```
 
-    > A value preserving type conversion is a [monomorphism](https://en.wikipedia.org/wiki/Monomorphism), i.e. every difference in the value of the source results in a difference in the value of the result. For example, conversion from Int8 to Int64 is value preserving because every distinct Int8 value is converted to a distinct Int64 value. Conversion in the other direction, however, cannot be value preserving: Int64 has more possible values than can be represented in an Int8.
+    > <i><span style="color: #C0C0C0">A value preserving type conversion is a [monomorphism](https://en.wikipedia.org/wiki/Monomorphism), i.e. every difference in the value of the source results in a difference in the value of the result. For example, conversion from Int8 to Int64 is value preserving because every distinct Int8 value is converted to a distinct Int64 value. Conversion in the other direction, however, cannot be value preserving: Int64 has more possible values than can be represented in an Int8.</span></i>
     > 
-    > Note: the ability to retrieve the original value has no bearing on whether a conversion is value preserving.
+    > <i><span style="color: #C0C0C0">Note: the ability to retrieve the original value has no bearing on whether a conversion is value preserving.</span></i>
 
-    </div>
-    </details>
 
-- **When the first argument forms part of a [prepositional phrase](https://en.wikipedia.org/wiki/Adpositional_phrase#Prepositional_phrases), give it an argument label.** The argument label should normally begin at the [preposition](https://en.wikipedia.org/wiki/Preposition_and_postposition), e.g. x.removeBoxes(havingLength: 12).
-    <details>
-    <summary>DETAIL</summary>
-    <div markdown="1">
+- <i><span style="color: #C0C0C0">**When the first argument forms part of a [prepositional phrase](https://en.wikipedia.org/wiki/Adpositional_phrase#Prepositional_phrases), give it an argument label.** The argument label should normally begin at the [preposition](https://en.wikipedia.org/wiki/Preposition_and_postposition), e.g. x.removeBoxes(havingLength: 12).</span></i>
 
-    An exception arises when the first two arguments represent parts of a single abstraction.
+
+    <i><span style="color: #C0C0C0">An exception arises when the first two arguments represent parts of a single abstraction.</span></i>
 
     ```swift
     ❌
@@ -309,7 +252,7 @@ x.move(from: x, to: y)
     a.fade(fromRed: b, green: c, blue: d)
     ```
 
-    In such cases, begin the argument label after the preposition, to keep the abstraction clear.
+    <i><span style="color: #C0C0C0">In such cases, begin the argument label after the preposition, to keep the abstraction clear.</span></i>
 
     ```swift
     ✅
@@ -317,16 +260,11 @@ x.move(from: x, to: y)
     a.fadeFrom(red: b, green: c, blue: d)
     ```
 
-    </div>
-    </details>
 
 
-- **Otherwise, if the first argument forms part of a grammatical phrase, omit its label,** appending any preceding words to the base name, e.g. x.addSubview(y)
-    <details>
-    <summary>DETAIL</summary>
-    <div markdown="1">
+- <i><span style="color: #C0C0C0">**Otherwise, if the first argument forms part of a grammatical phrase, omit its label,** appending any preceding words to the base name, e.g. x.addSubview(y)</span></i>
 
-    This guideline implies that if the first argument doesn’t form part of a grammatical phrase, it should have a label.
+    <i><span style="color: #C0C0C0">This guideline implies that if the first argument doesn’t form part of a grammatical phrase, it should have a label.</span></i>
 
     ```swift
     ✅
@@ -335,7 +273,7 @@ x.move(from: x, to: y)
     let studentsByName = students.sorted(isOrderedBefore: Student.namePrecedes)
     ```
 
-    Note that it’s important that the phrase convey the correct meaning. The following would be grammatical but would express the wrong thing.
+    <i><span style="color: #C0C0C0">Note that it’s important that the phrase convey the correct meaning. The following would be grammatical but would express the wrong thing.</span></i>
 
     ```swift
     ❌
@@ -343,14 +281,7 @@ x.move(from: x, to: y)
     words.split(12)       Split the number 12?
     ```
 
-    Note also that arguments with default values can be omitted, and in that case do not form part of a grammatical phrase, so they should always have labels.
+    <i><span style="color: #C0C0C0">Note also that arguments with default values can be omitted, and in that case do not form part of a grammatical phrase, so they should always have labels.</span></i>
 
-    </div>
-    </details>
+- <i><span style="color: #C0C0C0">**Label all other arguments.**</span></i>
 
-- **Label all other arguments.**
-
-</div>
-</details>
-
-번역문
