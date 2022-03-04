@@ -38,7 +38,7 @@ published: false
 
 ### 🔎 마크다운
 
-<img alt="image" src="https://user-images.githubusercontent.com/73867548/156736296-604bb354-33f3-4a5d-a181-eac9c6248ad0.png">
+<img alt="image" src="https://user-images.githubusercontent.com/73867548/156737933-cb84c4de-e524-4f49-8082-52f73dd8ff3d.png">
 
 - 번역문은 반드시 **원문 아래에** 작성합니다.
 - 원문은 회색, 이탤릭체로, 번역문은 속성을 추가하지 않고 병기합니다.
