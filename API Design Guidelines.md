@@ -1,9 +1,9 @@
 ---
 layout: default
 title: API Design Guidelines
-nav_order: 2
+nav_order: 1
 has_children: true
-permalink: /docs/apiDesiginGuidelines
+permalink: /
 ---
 
 # API Design Guidelines
