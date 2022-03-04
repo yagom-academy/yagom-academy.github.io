@@ -1,9 +1,8 @@
-
 ---
 layout: default
 title: 
 nav_order: 99
-permalink: /
+published: false
 ---
 
 
