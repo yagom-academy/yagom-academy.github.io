@@ -79,7 +79,7 @@
 - 브랜치와 커밋 컨벤션은 반드시 `필독사항의 규칙`을 따라주세요.
 - **작업할 때 반드시 [`Wiki`](https://github.com/yagom-academy/yagom-academy.github.io/wiki) 를 참고하여 정확하고 통일된 용어를 사용합니다.**
 - 내가 작성(번역)한 문장을 소리내어 읽어보았을 때 숨이 차거나 부자연스럽다면 문장을 짧게 끊어봐도 좋습니다.
-- API Design Guidelines 문서 작업시 [`API Design Guidelines 번역 가이드 문서`](https://github.com/yagom-academy/yagom-academy.github.io/blob/main/guide/API%20Design%20Guidelines%20번역%20가이드.md)를 참고해주세요.
+- API Design Guidelines 문서 작업시 [`API Design Guidelines 번역 가이드 문서`](https://yagomacademy.notion.site/API-Design-Guidelines-d4cbe05ef0b44cd3b4f05751f8d29926) 를 참고해주세요.
 
 <br>
 
